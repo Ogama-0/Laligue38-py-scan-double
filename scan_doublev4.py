@@ -146,14 +146,14 @@ def export_csv(doublons: dict, output_file: str = "output.csv"):
     try:
         with open(output_file, mode="w", newline="") as f:
             writer = csv.writer(f)
-            writer.writerow(["Doublon", "Original", "Taille (octets)"])
+            writer.writerow(["Doublon", "Original", "Taille (humain), Taille (Tri)"])
             for doublon, original in doublons.items():
                 try:
                     size = os.path.getsize(doublon)
                 except Exception as e:
                     print(f"Erreur pour obtenir la taille de {doublon} : {e}")
                     size = "?"
-                writer.writerow([doublon, original, print_size(size)])
+                writer.writerow([doublon, original, print_size(size)], size)
         print(f"Fichier CSV généré : {output_file}")
     except Exception as e:
         print(f"Erreur lors de la génération du fichier CSV : {e}")
