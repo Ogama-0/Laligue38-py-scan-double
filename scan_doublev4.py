@@ -10,11 +10,11 @@ def print_size(size:int) -> str:
     if len(str_size) <= 3 :
         return str_size + " o"
     elif len(str_size) <= 6 :
-        return str_size[-3] + "Ko"
+        return str_size[:-3] + "Ko"
     elif len(str_size) <= 9 :
-        return str_size[-6] + " Mo"
+        return str_size[:-6] + " Mo"
     else :
-        return str_size[-9] + " Go"
+        return str_size[:-9] + " Go"
 
 def is_hidden(path):
     return os.path.basename(path).startswith(".")
@@ -23,6 +23,8 @@ def hash_file(path):
     if path in hash_cache_file:
         return hash_cache_file[path]
 
+    if os.path.getsize(path) == 0:
+            return None  # Ignorer les fichiers de 0 octet
     hasher = hashlib.sha256()
     try:
         with open(path, 'rb') as f:
