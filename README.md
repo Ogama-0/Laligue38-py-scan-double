@@ -5,6 +5,6 @@ small program that scans for duplicate files/folders
 - tqdm <code>https://pypi.org/project/tqdm/</code>
 
 # Run :
-- use ``nix develop``
-  or
-- install pkgs with pip : ``pip install tqdm``
+- use <code>nix develop</code>
+- or
+- install pkgs with pip : <code>pip install tqdm</code>
