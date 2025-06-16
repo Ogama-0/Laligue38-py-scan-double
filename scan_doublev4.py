@@ -30,11 +30,16 @@ def is_hidden(path):
     return os.path.basename(path).startswith(".")
 
 def hash_file(path):
-    if path in hash_cache_file:
-        return hash_cache_file[path]
+    try :
+        if path in hash_cache_file:
+            return hash_cache_file[path]
 
-    if os.path.getsize(path) == 0:
-            return None  # Ignorer les fichiers de 0 octet
+        if os.path.getsize(path) == 0:
+                return None  # Ignorer les fichiers de 0 octet  
+    except Exception as e:
+        print(f"Erreur lors du hachage de {path} : {e}")
+        return None
+    
     hasher = hashlib.sha256()
     try:
         with open(path, 'rb') as f:
