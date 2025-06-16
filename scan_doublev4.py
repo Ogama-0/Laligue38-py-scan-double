@@ -5,16 +5,26 @@ import csv
 hash_cache_file = {}
 hash_cache_folder = {}
 
-def print_size(size:int) -> str:
-    str_size = str(size)
-    if len(str_size) <= 3 :
-        return str_size + " o"
-    elif len(str_size) <= 6 :
-        return str_size[:-3] + "Ko"
-    elif len(str_size) <= 9 :
-        return str_size[:-6] + " Mo"
-    else :
-        return str_size[:-9] + " Go"
+# def print_size(size:int) -> str:
+#     str_size = str(size)
+#     if len(str_size) <= 3 :
+#         return str_size + " o"
+#     elif len(str_size) <= 6 :
+#         return str_size[:-3] + "Ko"
+#     elif len(str_size) <= 9 :
+#         return str_size[:-6] + " Mo"
+#     else :
+#         return str_size[:-9] + " Go"
+
+def print_size(size: int) -> str:
+    if size < 1_000:
+        return f"{size} o"
+    elif size < 1_000_000:
+        return f"{size // 1_000} Ko"
+    elif size < 1_000_000_000:
+        return f"{size // 1_000_000} Mo"
+    else:
+        return f"{size // 1_000_000_000} Go"
 
 def is_hidden(path):
     return os.path.basename(path).startswith(".")
